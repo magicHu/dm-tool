@@ -1,0 +1,29 @@
+<h1>Listing params
+  <%= link_to 'New Param', new_param_path, class: 'btn btn-success' %>
+</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Desc</th>
+      <th>Default value</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @params.each do |param| %>
+      <tr>
+        <td><%= param.name %></td>
+        <td><%= param.desc %></td>
+        <td><%= param.default_value %></td>
+        <td>
+          <%= link_to 'Show', param %>
+          <%= link_to 'Edit', edit_param_path(param) %>
+          <%= link_to 'Destroy', param, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

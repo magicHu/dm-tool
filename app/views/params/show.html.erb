@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @param.name %>
+</p>
+
+<p>
+  <strong>Desc:</strong>
+  <%= @param.desc %>
+</p>
+
+<p>
+  <strong>Default value:</strong>
+  <%= @param.default_value %>
+</p>
+
+<%= link_to 'Edit', edit_param_path(@param) %> |
+<%= link_to 'Back', params_path %>
