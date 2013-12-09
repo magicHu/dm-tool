@@ -1,7 +1,13 @@
 DmTool::Application.routes.draw do
+  resources :pig_tasks
+
   resources :params
 
-  resources :jobs
+  resources :jobs do
+    member do
+      get :run
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

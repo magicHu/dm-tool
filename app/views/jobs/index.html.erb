@@ -21,9 +21,8 @@
         <td><%= job.path %></td>
         <td><%= job.hbase %></td>
         <td>
-          <%= link_to 'Show', job %>
-          <%= link_to 'Edit', edit_job_path(job) %>
-          <%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Run', run_job_path(job), class: 'btn btn-danger' %>
+          <%= link_to 'Detail', job, class: 'btn btn-success' %>
         </td>
       </tr>
     <% end %>

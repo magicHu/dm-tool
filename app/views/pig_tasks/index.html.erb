@@ -1,0 +1,27 @@
+<h1>Listing pig_tasks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pig_tasks.each do |pig_task| %>
+      <tr>
+        <td><%= pig_task.command %></td>
+        <td><%= link_to 'Show', pig_task %></td>
+        <td><%= link_to 'Edit', edit_pig_task_path(pig_task) %></td>
+        <td><%= link_to 'Destroy', pig_task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pig task', new_pig_task_path %>

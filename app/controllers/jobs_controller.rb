@@ -1,10 +1,23 @@
 class JobsController < ApplicationController
-  before_action :set_job, only: [:show, :edit, :update, :destroy]
+
+  before_action :set_job, only: [:show, :edit, :update, :destroy, :run]
 
   # GET /jobs
   # GET /jobs.json
   def index
     @jobs = Job.all
+  end
+
+  def run
+    @task = PigTask.create_task(@job, params)
+    respond_to do |format|
+      if @task.save
+        format.html { redirect_to @task, notice: 'Task was successfully created.' } 
+        format.json { render json: @task }
+      else
+        format.html { render action: 'index' }
+      end
+    end
   end
 
   # GET /jobs/1
