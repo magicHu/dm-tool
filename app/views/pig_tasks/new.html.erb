@@ -1,5 +1,29 @@
-<h1>New pig_task</h1>
+<h1 class="page-header">New Task
+  <%= link_to 'Back', pig_tasks_path, class: 'btn btn-default' %>
+</h1>
 
-<%= render 'form' %>
+<%= form_for(@pig_task) do |f| %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Job Name</th>
+        <th>Job Desc</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @jobs.each do |job| %>
+        <tr class="danger">
+          <td><%= job.name %></td>
+          <td><%= job.desc %></td>
+          <td>
+            <a href="#" class="btn btn-default add-job" data-job='<%= job.id %>'>Add to task</a>
+            <%= f.hidden_field "job_ids", :multiple => true, :value => '', class: 'job-ids' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'Back', pig_tasks_path %>
+  <button type="submit" class="btn btn-primary btn-lg pull-right">Next</button>
+<% end %>

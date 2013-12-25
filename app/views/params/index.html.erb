@@ -19,9 +19,8 @@
         <td><%= param.desc %></td>
         <td><%= param.default_value %></td>
         <td>
-          <%= link_to 'Show', param %>
-          <%= link_to 'Edit', edit_param_path(param) %>
-          <%= link_to 'Destroy', param, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Edit', edit_param_path(param), class: 'btn btn-default' %>
+          <%= link_to 'Destroy', param, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default' %>
         </td>
       </tr>
     <% end %>

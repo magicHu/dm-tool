@@ -1,8 +1,23 @@
 DmTool::Application.routes.draw do
-  resources :pig_tasks
 
+  resources :ad_campaigns do
+    
+  end
+
+  get "dsp/index"
+  resources :pig_tasks do
+    resources :task_jobs do
+      member do
+        get :up
+        get :down
+      end
+    end
+    member do
+      
+    end
+  end
+  
   resources :params
-
   resources :jobs do
     member do
       get :run
@@ -13,7 +28,7 @@ DmTool::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'jobs#index'
+  root 'pig_tasks#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

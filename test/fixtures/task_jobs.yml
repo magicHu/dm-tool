@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pig_task: 
+  job: 
+  position: 1
+
+two:
+  pig_task: 
+  job: 
+  position: 1

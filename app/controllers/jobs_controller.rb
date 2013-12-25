@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
 
-  before_action :set_job, only: [:show, :edit, :update, :destroy, :run]
+  before_action :set_job, only: [:show, :edit, :update, :destroy, :run, :add_to_task]
 
   # GET /jobs
   # GET /jobs.json
@@ -40,6 +40,13 @@ class JobsController < ApplicationController
   # POST /jobs.json
   def create
     @job = Job.new(job_params)
+
+    param_ids = params[:job][:param_ids]
+    if param_ids
+      param_ids.each do |param_id|
+        @job.params << Param.find(param_id) unless param_id.blank? || param_id.to_i == 0
+      end
+    end
 
     respond_to do |format|
       if @job.save
@@ -84,6 +91,6 @@ class JobsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      params.require(:job).permit(:name, :desc, :path, :hbase)
+      params.require(:job).permit(:name, :desc, :path, :hbase, :param_ids)
     end
 end

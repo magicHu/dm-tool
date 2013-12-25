@@ -16,13 +16,14 @@
   <tbody>
     <% @jobs.each do |job| %>
       <tr>
-        <td><%= job.name %></td>
+        <td><%= link_to job.name, job %></td>
         <td><%= job.desc %></td>
         <td><%= job.path %></td>
         <td><%= job.hbase %></td>
         <td>
-          <%= link_to 'Run', run_job_path(job), class: 'btn btn-danger' %>
-          <%= link_to 'Detail', job, class: 'btn btn-success' %>
+          <%= link_to 'Show', job, class: 'btn btn-default' %>
+          <%= link_to 'Edit', edit_job_path(job), class: 'btn btn-default' %>
+          <%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default' %>
         </td>
       </tr>
     <% end %>

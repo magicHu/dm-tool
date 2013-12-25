@@ -1,6 +1,71 @@
-<h1>Editing pig_task</h1>
+<h1 class="page-header">Editing Task</h1>
 
-<%= render 'form' %>
+<%= form_for(@pig_task, html: { role: "form", class: "form-horizontal" }) do |f| %>
+  <% if @pig_task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pig_task.errors.count, "error") %> prohibited this pig_task from being saved:</h2>
 
-<%= link_to 'Show', @pig_task %> |
-<%= link_to 'Back', pig_tasks_path %>
+      <ul>
+      <% @pig_task.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :name, class: "form-control", placeholder: "Task Name" %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label 'Jobs', class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <table class="table table-striped table-bordered">
+        <tbody>
+          <% @pig_task.task_jobs.each do |task_job| %>
+            <tr>
+              <td><%= task_job.job.name %></td>
+              <td>
+                <%= link_to content_tag(:i, "", :class => "icon-arrow-up icon-large"), up_pig_task_task_job_path(@pig_task, task_job), class: 'btn btn-default job-up', :remote => true %>
+                <%= link_to content_tag(:i, "", :class => "icon-arrow-down icon-large"), down_pig_task_task_job_path(@pig_task, task_job), class: 'btn btn-default job-down', :remote => true %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label '基本输出路径', class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :base_path, class: "form-control", placeholder: "/tmp/" %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :Params, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <% @params.each do |param| %>
+        <div class="col-sm-5" style="margin-bottom: 10px;">
+          <div class="col-sm-6">
+            <%= param.desc %>
+          </div>
+          <div class="col-sm-6">
+            <input type="text" name='task_params[<%= param.name %>]' value='<%= param.default_value %>' >
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-5 col-sm-7">
+      <button type="submit" class="btn btn-primary btn-lg">Next</button>
+    </div>
+  </div>
+  
+<% end %>

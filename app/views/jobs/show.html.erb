@@ -1,25 +1,49 @@
-<p id="notice"><%= notice %></p>
+<h1 class="page-header">基本任务详细信息
+  <%= link_to 'Back', jobs_path, class: 'btn btn-default' %>
+</h1>
 
-<p>
-  <strong>Name:</strong>
-  <%= @job.name %>
-</p>
+<div class="col-md-2">  
+</div>
+<div class="col-md-10">
+  <div class="col-md-2">
+    <strong>Name:</strong>
+  </div>
+  <div class="col-md-10">
+    <%= @job.name %>
+  </div>
 
-<p>
-  <strong>Desc:</strong>
-  <%= @job.desc %>
-</p>
+  <div class="col-md-2">
+    <strong>Desc:</strong>
+  </div>
+  <div class="col-md-10">
+    <%= @job.desc %>
+  </div>
+  
+  <div class="col-md-2">
+    <strong>Path:</strong>
+  </div>
+  <div class="col-md-10">
+    <%= @job.path %>
+  </div>
 
-<p>
-  <strong>Path:</strong>
-  <%= @job.path %>
-</p>
+  <div class="col-md-2">
+    <strong>HBase:</strong>
+  </div>
+  <div class="col-md-10">
+    <%= @job.hbase %>
+  </div>
 
-<p>
-  <strong>Hbase:</strong>
-  <%= @job.hbase %>
-</p>
-
-<%= link_to 'Edit', edit_job_path(@job) %> |
-<%= link_to 'Destroy', @job, method: :delete, data: { confirm: 'Are you sure?' } %> | 
-<%= link_to 'Back', jobs_path %>
+  <div class="col-md-2">
+    <strong>Params:</strong>
+  </div>
+  <div class="col-md-10">
+    <% @job.params.each do |param| %>
+      <div class="col-md-4">
+        <%= param.name %>
+      </div>
+      <div class="col-md-8">
+        <%= param.desc %>
+      </div>
+    <% end %>
+  </div>
+</div>

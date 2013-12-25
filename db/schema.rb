@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131207081111) do
+ActiveRecord::Schema.define(version: 20131217122617) do
 
   create_table "jobs", force: true do |t|
     t.string   "name"
@@ -33,10 +33,22 @@ ActiveRecord::Schema.define(version: 20131207081111) do
     t.string   "default_value"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "field_type"
   end
 
   create_table "pig_tasks", force: true do |t|
     t.text     "command"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+    t.integer  "status",     default: 1
+    t.string   "base_path"
+  end
+
+  create_table "task_jobs", force: true do |t|
+    t.integer  "pig_task_id"
+    t.integer  "job_id"
+    t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

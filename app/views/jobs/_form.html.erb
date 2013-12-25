@@ -1,4 +1,4 @@
-<%= form_for(@job) do |f| %>
+<%= form_for(@job, html: { role: "form", class: "form-horizontal" }) do |f| %>
   <% if @job.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@job.errors.count, "error") %> prohibited this job from being saved:</h2>
@@ -11,31 +11,50 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :desc %><br>
-    <%= f.text_area :desc %>
-  </div>
-  <div class="field">
-    <%= f.label :path %><br>
-    <%= f.text_field :path %>
-  </div>
-  <div class="field">
-    <%= f.label :hbase %>
-    <%= f.check_box :hbase %>
+  <div class="form-group">
+    <%= f.label :name, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :name, class: "form-control", placeholder: "Job Name" %>
+    </div>
   </div>
 
-  <% @all_params.each do |param| %>
-    <p>
-      <%= f.check_box :param_ids, param.desc, @job.params.find(param) %>
-    </p>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <%= f.label :desc, class: "col-sm-2 control-label"%>
+    <div class="col-sm-10">
+      <%= f.text_area :desc, class: "form-control", placeholder: "Job Desc", rows: 4 %>
+    </div>
   </div>
-
+  
+  <div class="form-group">
+    <%= f.label :path, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :path, class: "form-control", placeholder: "Job Path" %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :hbase, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.check_box :hbase, class: "form-control" %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :Params, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <% @all_params.each do |param| %>
+        <p>
+          <%= f.check_box :param_ids, { :multiple => true }, param.id %>
+          <%= f.label param.desc %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <%= link_to 'Back', jobs_path, class: 'btn btn-default' %>
+    </div>
+  </div>
 <% end %>

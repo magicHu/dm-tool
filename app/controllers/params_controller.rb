@@ -28,7 +28,7 @@ class ParamsController < ApplicationController
 
     respond_to do |format|
       if @param.save
-        format.html { redirect_to @param, notice: 'Param was successfully created.' }
+        format.html { redirect_to params_url, notice: 'Param was successfully created.' }
         format.json { render action: 'show', status: :created, location: @param }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class ParamsController < ApplicationController
   def update
     respond_to do |format|
       if @param.update(param_params)
-        format.html { redirect_to @param, notice: 'Param was successfully updated.' }
+        format.html { redirect_to params_url, notice: 'Param was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

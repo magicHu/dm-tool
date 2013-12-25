@@ -1,11 +1,13 @@
-<h1>Listing pig_tasks</h1>
+<h1 class='page-header'>
+  数据任务列表
+  <%= link_to 'New task', new_pig_task_path, class: 'btn btn-success' %>
+</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
-      <th>Command</th>
-      <th></th>
-      <th></th>
+      <th>Name</th>
+      <th>Status</th>
       <th></th>
     </tr>
   </thead>
@@ -13,15 +15,14 @@
   <tbody>
     <% @pig_tasks.each do |pig_task| %>
       <tr>
-        <td><%= pig_task.command %></td>
-        <td><%= link_to 'Show', pig_task %></td>
-        <td><%= link_to 'Edit', edit_pig_task_path(pig_task) %></td>
-        <td><%= link_to 'Destroy', pig_task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= pig_task.name %></td>
+        <td><%= pig_task.status %></td>
+        <td>
+          <%= link_to 'Show', pig_task, class: 'btn btn-success' %>
+          <%= link_to 'Edit', edit_pig_task_path(pig_task), class: 'btn btn-success' %>
+          <%= link_to 'Destroy', pig_task, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Pig task', new_pig_task_path %>
