@@ -8,6 +8,6 @@ worker_processes 2
 #stderr_path "#{project_path}/log/unicorn.log"
 #stdout_path "#{project_path}/log/unicorn.log"
 
-listen = 3000
+listen 3000
 
 timeout 30
