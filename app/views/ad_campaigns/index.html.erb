@@ -7,6 +7,7 @@
     <tr>
       <th>ad campaign id</th>
       <th>keywords</th>
+      <th>match cookie count</th>
       <th></th>
     </tr>
   </thead>
@@ -16,6 +17,11 @@
       <tr>
         <td><%= ad_campaign %></td>
         <td><%= keywords %></td>
+        <td>
+          <span class="badge badge-danger">
+            <%= @ad_campaign_match_count[ad_campaign] %>
+          </span>
+        </td>
         <th>
           <a href="/ad_campaigns/<%= ad_campaign %>" class='btn btn-danger' data-method="delete">
             <i class="icon-trash icon-large"></i> Delete

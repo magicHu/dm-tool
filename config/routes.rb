@@ -1,10 +1,13 @@
 DmTool::Application.routes.draw do
 
-  resources :ad_campaigns do
-    
+  resource :dsp do
+    get :index
+    get :ad_campaign_match_count
   end
 
-  get "dsp/index"
+  resources :ad_campaigns do
+  end
+
   resources :pig_tasks do
     resources :task_jobs do
       member do

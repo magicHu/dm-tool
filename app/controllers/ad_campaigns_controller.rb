@@ -4,6 +4,11 @@ class AdCampaignsController < ApplicationController
 
   def index
     @ad_campaign_keywords = redis.hgetall(ad_campaign_keywords_key)
+
+    @ad_campaign_match_count = {}
+    @ad_campaign_keywords.each do |ad_campaign_id, keywords|
+      @ad_campaign_match_count[ad_campaign_id] = redis.zcard(rtt_ad_campaign_prefix + ad_campaign_id)
+    end
   end
 
   def destroy
@@ -14,7 +19,6 @@ class AdCampaignsController < ApplicationController
   end
 
   def create
-    binding.pry
     ad_campaign_id = params[:id]
     keywords = params[:keywords]
     redis.hset(ad_campaign_keywords_key, ad_campaign_id, keywords)
@@ -24,14 +28,6 @@ class AdCampaignsController < ApplicationController
   
 
   private
-  def ad_campaign_keywords_key
-    "adCampaignKeywords"
-  end
-
-  def adCampaignKeywordChannel
-    "adCampaignKeywordChannel"
-  end
-
   def notify_rtt
     redis.publish(adCampaignKeywordChannel, "reload")
   end

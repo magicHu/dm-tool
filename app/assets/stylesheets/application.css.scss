@@ -14,3 +14,11 @@
 
 @import 'bootstrap';
 @import "font-awesome";
+
+.badge-success {
+  @include label-variant($label-success-bg);
+}
+
+.badge-danger {
+  @include label-variant($label-danger-bg);
+}

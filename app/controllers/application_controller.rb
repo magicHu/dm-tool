@@ -8,11 +8,24 @@ class ApplicationController < ActionController::Base
   host, port = DmTool::Application.config.redis.split(":")
   @@redis = Redis.new(:host => host, :port => port)
 
+
+  protected
   def redis
     @@redis
   end
 
-  private
+  def ad_campaign_keywords_key
+    "adCampaignKeywords"
+  end
+
+  def adCampaignKeywordChannel
+    "adCampaignKeywordChannel"
+  end
+
+  def rtt_ad_campaign_prefix
+    "rtt:stat:"
+  end
+
   def current_task
     task_id = session[:task_id]
     if task_id
