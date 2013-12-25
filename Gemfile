@@ -40,7 +40,7 @@ end
 group :development do
   gem 'guard-livereload', require: false
   gem 'pry'
-  gem 'pry-debugger'
+  #gem 'pry-debugger'
 
   gem "better_errors"
   gem "binding_of_caller"
