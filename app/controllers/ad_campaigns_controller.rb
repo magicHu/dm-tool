@@ -7,7 +7,7 @@ class AdCampaignsController < ApplicationController
 
     @ad_campaign_match_count = {}
     @ad_campaign_keywords.each do |ad_campaign_id, keywords|
-      @ad_campaign_match_count[ad_campaign_id] = redis.zcard(rtt_ad_campaign_prefix + ad_campaign_id)
+      @ad_campaign_match_count[ad_campaign_id] = multiple_redis.zcard(rtt_ad_campaign_prefix + ad_campaign_id)
     end
   end
 
@@ -25,7 +25,6 @@ class AdCampaignsController < ApplicationController
 
     redirect_to :action => :index
   end
-  
 
   private
   def notify_rtt

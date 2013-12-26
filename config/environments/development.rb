@@ -27,5 +27,5 @@ DmTool::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
-  config.redis = "127.0.0.1:6379"
+  config.redis = "127.0.0.1:6379,127.0.0.1:6379"
 end
