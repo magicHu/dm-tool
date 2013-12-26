@@ -78,6 +78,6 @@ DmTool::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  config.redis = "10.40.6.72:6379,10.40.6.73:6379"
+  config.redis = "10.40.6.72:6379,10.40.6.73:6380"
   
 end

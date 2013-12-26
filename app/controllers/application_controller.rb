@@ -6,23 +6,19 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  redis_servers = DmTool::Application.config.redis.split(',')
-
-  # first redis server
-  host, port = redis_servers[0].split(":")
-  @@redis = Redis.new(:host => host, :port => port)
-
-  # multiple redis server cluster
-  multiple_redis_servers = redis_servers.map { |redis_server| "redis://" + redis_server }
-  @@multiple_redis = Redis::Distributed.new multiple_redis_servers
+  @@redis_clients = []
+  DmTool::Application.config.redis.split(',').each do |redis_server|
+    host, port = redis_server.split(":")
+    @@redis_clients << Redis.new(:host => host, :port => port)
+  end
 
   protected
   def redis
-    @@redis
+    @@redis_clients[0]
   end
 
-  def multiple_redis
-    @@multiple_redis
+  def redis_clients
+    @@redis_clients
   end
 
   def ad_campaign_keywords_key
