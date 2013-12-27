@@ -15,15 +15,15 @@
   <thead>
     <tr>
       <th>Job Name</th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
     <% @pig_task.jobs.each do |job| %>
       <tr>
         <td><%= job.name %></td>
-        <td><%= link_to 'Up' %><%= link_to 'Down' %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<button class="btn btn-danger">Run</button>

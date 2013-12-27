@@ -1,2 +1,12 @@
-<h3 class="page-header">
-  Ad Campaign Match Cookie Count</h3>
+<h3 class="page-header">Search Cookie Match Ad Campaign</h3>
+
+<%= form_tag("/dsp/search_match_ad_campaign", method: 'get', class: 'form-inline', id: 'search_match_ad_campaign_form') do %>
+  <div class="form-group">
+    <label class="sr-only" for="cookie">Cookie</label>
+    <input type="text" class="form-control" style="width: 300px;" name="cookie" id="cookie" placeholder="Enter cookie">
+  </div>
+  <button type="button" class="btn btn-success" id='search-match-ad-campaign-btn'>Search</button>
+
+  <span class="badge badge-danger" id="ad-campaign-ids" style='margin-left: 20px;'></span>
+
+<% end %>

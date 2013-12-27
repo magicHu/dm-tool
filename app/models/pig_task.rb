@@ -4,20 +4,20 @@ class PigTask < ActiveRecord::Base
   has_many :jobs, through: :task_jobs
   has_many :params, through: :jobs
 
-  BASH_PATH = "/opt/dm"
+  BASH_PATH = "/dm/dm"
 
   def generate_command(params)
     command = ""
 
     if jobs.size >= 2
-      command << %(<
-        #!/bin/bash
-        export JAVA_HOME=/opt/jdk1.6.0_31
-        export PATH=$JAVA_HOME/bin:$PATH
-        export CLASSPATH=.:$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar:$CLASSPATH
-        export HADOOP_MAPRED_HOME=/usr/lib/hadoop-mapreduce
+      command << %(
+#!/bin/bash
+export JAVA_HOME=/opt/jdk1.6.0_31
+export PATH=$JAVA_HOME/bin:$PATH
+export CLASSPATH=.:$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar:$CLASSPATH
+export HADOOP_MAPRED_HOME=/usr/lib/hadoop-mapreduce
 
-      >)
+)
     end
 
     jobs.each do |job|

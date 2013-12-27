@@ -2,7 +2,7 @@ DmTool::Application.routes.draw do
 
   resource :dsp do
     get :index
-    get :ad_campaign_match_count
+    get :search_match_ad_campaign
   end
 
   resources :ad_campaigns do

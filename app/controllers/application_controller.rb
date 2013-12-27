@@ -33,6 +33,10 @@ class ApplicationController < ActionController::Base
     "rtt:stat:"
   end
 
+  def rtt_prefix
+    "rtt:"
+  end
+
   def current_task
     task_id = session[:task_id]
     if task_id

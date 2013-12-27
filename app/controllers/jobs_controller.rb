@@ -2,6 +2,8 @@ class JobsController < ApplicationController
 
   before_action :set_job, only: [:show, :edit, :update, :destroy, :run, :add_to_task]
 
+  @@source_base_path = "/Users/magic/git/buzzinate/dm/pig-ext/script/data-platform"
+
   # GET /jobs
   # GET /jobs.json
   def index
@@ -23,6 +25,8 @@ class JobsController < ApplicationController
   # GET /jobs/1
   # GET /jobs/1.json
   def show
+    source_path = "#{@@source_base_path}/#{@job.path}"
+    @contents = File.open(source_path, 'rb') {|f| f.read}
   end
 
   # GET /jobs/new
