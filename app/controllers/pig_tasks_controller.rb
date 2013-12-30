@@ -1,5 +1,5 @@
 class PigTasksController < ApplicationController
-  before_action :set_pig_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_pig_task, only: [:show, :edit, :update, :destroy, :run]
 
   # GET /pig_tasks
   # GET /pig_tasks.json
@@ -21,19 +21,21 @@ class PigTasksController < ApplicationController
   # GET /pig_tasks/1/edit
   def edit
     @jobs = @pig_task.jobs
-    @params = @pig_task.params
+    @params = @pig_task.params.uniq { |param| param.id }
+  end
+
+  def run
+    system("nohup bash #{@pig_task.pig_shell_path} > #{@pig_task.pig_log_path} &")
+
+    respond_to do |format|
+      format.html { redirect_to pig_tasks_path, notice: "#{@pig_task.name} task was started..." }
+    end
   end
 
   # POST /pig_tasks
   # POST /pig_tasks.json
   def create
-    @pig_task = PigTask.new(pig_task_params)
-    job_ids = params[:pig_task][:job_ids]
-    if job_ids
-      job_ids.each do |job_id|
-        @pig_task.task_jobs.build(:job => Job.find(job_id)) unless job_id.blank?
-      end
-    end
+    @pig_task = PigTask.create_by_jobs(params[:pig_task][:job_ids])
 
     respond_to do |format|
       if @pig_task.save
@@ -52,6 +54,10 @@ class PigTasksController < ApplicationController
     task_params = params['task_params']
     @pig_task.assign_attributes(pig_task_params)
     @pig_task.command = @pig_task.generate_command(task_params)
+
+    File.open(@pig_task.pig_shell_path, 'wb') do |file|
+      file.write(@pig_task.command)
+    end
 
     respond_to do |format|
       if @pig_task.update(pig_task_params)

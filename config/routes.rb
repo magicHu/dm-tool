@@ -16,16 +16,12 @@ DmTool::Application.routes.draw do
       end
     end
     member do
-      
+      get :run
     end
   end
   
   resources :params
-  resources :jobs do
-    member do
-      get :run
-    end
-  end
+  resources :jobs 
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

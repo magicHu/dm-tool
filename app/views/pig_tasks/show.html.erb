@@ -7,9 +7,7 @@
 </h1>
 
 <div>Command</div>
-<textarea class="form-control" rows="10">
-  <%= @pig_task.command %>
-</textarea>
+<textarea class="form-control" rows="15"><%= @pig_task.command %></textarea>
 
 <table class="table">
   <thead>
@@ -26,4 +24,4 @@
   </tbody>
 </table>
 
-<button class="btn btn-danger">Run</button>
+<%= link_to 'Run', run_pig_task_path(@pig_task), class: 'btn btn-danger btn-lg col-sm-offset-5' %>

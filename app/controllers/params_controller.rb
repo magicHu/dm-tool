@@ -69,6 +69,6 @@ class ParamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def param_params
-      params.require(:param).permit(:name, :desc, :default_value)
+      params.require(:param).permit(:name, :desc, :default_value, :field_type)
     end
 end

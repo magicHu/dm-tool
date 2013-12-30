@@ -4,5 +4,5 @@ class Job < ActiveRecord::Base
   has_many :task_jobs
   has_many :tasks, class_name: 'PigTask', through: :task_jobs
 
-  
+  validates :name, :desc, :path, presence: true
 end

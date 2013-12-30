@@ -5,6 +5,32 @@ class PigTask < ActiveRecord::Base
   has_many :params, through: :jobs
 
   BASH_PATH = "/dm/dm"
+  BASIC_PIG_SHELL_DIR = "tmp/pig"
+  BASIC_PIG_LOG_DIR = "log/pig"
+
+  def pig_shell_path
+    FileUtils.mkdir_p(BASIC_PIG_SHELL_DIR) unless File.directory?(BASIC_PIG_SHELL_DIR)
+    "#{BASIC_PIG_SHELL_DIR}/#{self.id}.sh"
+  end
+
+  def pig_log_path
+    FileUtils.mkdir_p(BASIC_PIG_LOG_DIR) unless File.directory?(BASIC_PIG_LOG_DIR)
+    "#{BASIC_PIG_LOG_DIR}/#{self.id}.log"
+  end
+
+  def self.create_by_jobs(job_ids)
+    pig_task = PigTask.new()
+    if job_ids
+      if job_ids.kind_of?(Array)
+        job_ids.each do |job_id|
+          pig_task.task_jobs.build(:job => Job.find(job_id)) unless job_id.blank?
+        end
+      else
+        pig_task.task_jobs.build(:job => Job.find(job_ids)) unless job_ids.blank?
+      end
+    end
+    pig_task
+  end
 
   def generate_command(params)
     command = ""
@@ -33,9 +59,14 @@ export HADOOP_MAPRED_HOME=/usr/lib/hadoop-mapreduce
 
     job.params.each do |param|
       param_value = params[param.name]
-      command << " -p #{param.name}=#{base_path}/#{param_value} "
+
+      if param.is_path?
+        command << " -p #{param.name}=#{base_path}/#{param_value}"
+      else
+        command << " -p #{param.name}=#{param_value}"
+      end
     end
-    command << " #{BASH_PATH}/#{job.path} "
+    command << " #{BASH_PATH}/#{job.path}"
 
     command
   end

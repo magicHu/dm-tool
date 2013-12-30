@@ -4,3 +4,7 @@
 require File.expand_path('../config/application', __FILE__)
 
 DmTool::Application.load_tasks
+
+task :git_pull do
+  exec('cd /Users/magic/git/buzzinate/buzz-ads && git pull')
+end
