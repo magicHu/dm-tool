@@ -4,7 +4,7 @@ class Param < ActiveRecord::Base
 
   @@field_types = { 'path' => 'path', 'date' => 'date', 'number' => 'number' }
 
-  validates :name, :desc, :default_value, :field_type, presence: true
+  validates :name, :desc, :field_type, presence: true
   
   def self.field_types
     @@field_types
