@@ -33,10 +33,7 @@ class PigTask < ActiveRecord::Base
   end
 
   def generate_command(params)
-    command = ""
-
-    if jobs.size >= 2
-      command << %(
+    command << %(
 #!/bin/bash
 export JAVA_HOME=/opt/jdk1.6.0_31
 export PATH=$JAVA_HOME/bin:$PATH
@@ -44,7 +41,6 @@ export CLASSPATH=.:$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar:$CLASSPATH
 export HADOOP_MAPRED_HOME=/usr/lib/hadoop-mapreduce
 
 )
-    end
 
     jobs.each do |job|
       command << generate_job_command(job, params)
