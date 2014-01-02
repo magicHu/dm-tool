@@ -80,4 +80,6 @@ DmTool::Application.configure do
 
   config.redis = "10.40.6.72:6379,10.40.6.73:6379"
   
+  config.pig_source_base_path = "/dm/dm-source/pig-ext/script/data-platform"
+
 end

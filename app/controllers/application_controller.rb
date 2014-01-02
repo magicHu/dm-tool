@@ -12,7 +12,13 @@ class ApplicationController < ActionController::Base
     @@redis_clients << Redis.new(:host => host, :port => port)
   end
 
+  @@pig_source_base_path = DmTool::Application.config.pig_source_base_path
+
   protected
+  def pig_source_base_path
+    @@pig_source_base_path
+  end
+
   def redis
     @@redis_clients[0]
   end

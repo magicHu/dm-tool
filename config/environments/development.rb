@@ -28,4 +28,7 @@ DmTool::Application.configure do
   config.assets.debug = true
 
   config.redis = "127.0.0.1:6379"
+
+  config.pig_source_base_path = "/Users/magic/git/buzzinate/dm/pig-ext/script/data-platform"
+
 end
