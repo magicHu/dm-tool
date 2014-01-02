@@ -33,7 +33,7 @@ class PigTask < ActiveRecord::Base
   end
 
   def generate_command(params)
-    command << %(
+    command = %(
 #!/bin/bash
 export JAVA_HOME=/opt/jdk1.6.0_31
 export PATH=$JAVA_HOME/bin:$PATH
