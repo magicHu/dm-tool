@@ -1,5 +1,6 @@
 DmTool::Application.routes.draw do
 
+  get "tools/index"
   resource :dsp do
     get :index
     get :search_match_ad_campaign
@@ -27,7 +28,7 @@ DmTool::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'pig_tasks#index'
+  root 'ad_campaigns#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

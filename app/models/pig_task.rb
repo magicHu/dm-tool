@@ -7,6 +7,7 @@ class PigTask < ActiveRecord::Base
   BASH_PATH = "/dm/dm"
   BASIC_PIG_SHELL_DIR = "tmp/pig"
   BASIC_PIG_LOG_DIR = "log/pig"
+  pig_source_base_path = DmTool::Application.config..pig_source_base_path
 
   def pig_shell_path
     FileUtils.mkdir_p(BASIC_PIG_SHELL_DIR) unless File.directory?(BASIC_PIG_SHELL_DIR)
@@ -62,7 +63,7 @@ export HADOOP_MAPRED_HOME=/usr/lib/hadoop-mapreduce
         command << " -p #{param.name}=#{param_value}"
       end
     end
-    command << " #{BASH_PATH}/#{job.path}"
+    command << " #{pig_source_base_path}/#{job.path}"
 
     command
   end

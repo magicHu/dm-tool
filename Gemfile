@@ -31,6 +31,7 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'acts_as_list'
 gem "redis", "~> 3.0.6"
+gem 'carrierwave'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -44,6 +45,8 @@ group :development do
 
   gem "better_errors"
   gem "binding_of_caller"
+
+  gem 'capistrano-rails', '~> 1.0.0'
 end
 
 # Use ActiveModel has_secure_password
@@ -53,7 +56,7 @@ end
 gem 'unicorn'
 
 # Use Capistrano for deployment
-gem 'capistrano'
+gem 'capistrano', '~> 3.0.1'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
