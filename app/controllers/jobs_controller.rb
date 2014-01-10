@@ -11,7 +11,7 @@ class JobsController < ApplicationController
   # GET /jobs/1
   # GET /jobs/1.json
   def show
-    source_path = "#{pig_source_base_path}/#{@job.path}"
+    source_path = "#{pig_source_base_dir}/#{@job.path}"
     @contents = File.open(source_path, 'rb') {|f| f.read}
   end
 

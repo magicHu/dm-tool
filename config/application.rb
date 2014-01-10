@@ -21,5 +21,8 @@ module DmTool
     # config.i18n.default_locale = :de
 
     config.eager_load_paths += ["#{Rails.root}/lib}"]
+
+    config.pig_shell_dir = "tmp/pig"
+    config.pig_log_dir = "log/pig"
   end
 end

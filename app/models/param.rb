@@ -5,6 +5,7 @@ class Param < ActiveRecord::Base
   @@field_types = { 'path' => 'path', 'date' => 'date', 'number' => 'number', 'string' => 'string' }
 
   validates :name, :desc, :field_type, presence: true
+  validates :name, uniqueness: true
   
   def self.field_types
     @@field_types
@@ -12,6 +13,10 @@ class Param < ActiveRecord::Base
 
   def is_path?
     field_type == 'path'
+  end
+
+  def is_date?
+    field_type == 'date'
   end
 
 end

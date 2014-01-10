@@ -16,8 +16,10 @@ DmTool::Application.routes.draw do
         get :down
       end
     end
+
     member do
       get :run
+      post :update_command
     end
   end
   

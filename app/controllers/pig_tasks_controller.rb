@@ -1,10 +1,10 @@
 class PigTasksController < ApplicationController
-  before_action :set_pig_task, only: [:show, :edit, :update, :destroy, :run]
+  before_action :set_pig_task, only: [:show, :edit, :update, :destroy, :run, :update_command]
 
   # GET /pig_tasks
   # GET /pig_tasks.json
   def index
-    @pig_tasks = PigTask.all
+    @pig_tasks = PigTask.page(params[:page])
   end
 
   # GET /pig_tasks/1
@@ -65,6 +65,18 @@ class PigTasksController < ApplicationController
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
+        format.json { render json: @pig_task.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update_command
+    respond_to do |format|
+      if @pig_task.update(pig_task_params)
+        format.html { redirect_to @pig_task, notice: 'Pig task command was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'show' }
         format.json { render json: @pig_task.errors, status: :unprocessable_entity }
       end
     end

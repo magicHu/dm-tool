@@ -79,7 +79,7 @@ DmTool::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   config.redis = "10.40.6.72:6379,10.40.6.73:6379"
-  
-  config.pig_source_base_path = "/dm/dm-source/pig-ext/script/data-platform"
+  config.pig_source_base_dir = "/dm/dm-source/pig-ext/script/data-platform"
+  config.pig_jar_base_dir = "/dm/dm"
 
 end

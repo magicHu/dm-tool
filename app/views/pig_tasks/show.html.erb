@@ -6,8 +6,16 @@
   </small>  
 </h1>
 
-<div>Command</div>
-<textarea class="form-control" rows="15"><%= @pig_task.command %></textarea>
+<%= form_for(@pig_task, url: update_command_pig_task_path(@pig_task), method: 'post', html: { role: "form" }) do |f| %>
+  <div class="form-group">
+    <label for="command">Command</label>
+    <button class="btn btn-success pull-right" type="submit">
+      <i class="icon-refresh icon-spin"></i>
+      Update
+    </button>
+    <%= f.text_area :command, class: "form-control",  rows: "15" %>
+  </div>
+<% end %>
 
 <table class="table">
   <thead>

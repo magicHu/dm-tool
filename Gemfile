@@ -9,6 +9,7 @@ gem 'sqlite3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 gem 'bootstrap-sass', '~> 3.0.2.0'
+gem 'bootstrap-datepicker-rails'
 gem "font-awesome-rails", "~> 3.2.1.3"
 
 # Use Uglifier as compressor for JavaScript assets
@@ -32,6 +33,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'acts_as_list'
 gem "redis", "~> 3.0.6"
 gem 'carrierwave'
+gem 'kaminari'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

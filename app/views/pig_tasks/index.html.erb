@@ -9,7 +9,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Status</th>
+      <th>Time</th>
       <th></th>
     </tr>
   </thead>
@@ -18,7 +18,7 @@
     <% @pig_tasks.each do |pig_task| %>
       <tr>
         <td><%= pig_task.name %></td>
-        <td><%= pig_task.status %></td>
+        <td><%= pig_task.created_at %></td>
         <td>
           <%= link_to 'Show', pig_task, class: 'btn btn-success' %>
           <%= link_to 'Edit', edit_pig_task_path(pig_task), class: 'btn btn-success' %>
@@ -28,3 +28,5 @@
     <% end %>
   </tbody>
 </table>
+
+<%= paginate @pig_tasks %>

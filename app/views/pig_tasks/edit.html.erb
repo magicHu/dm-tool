@@ -55,7 +55,7 @@
             <%= param.desc %>
           </div>
           <div class="col-sm-6">
-            <input type="text" name='task_params[<%= param.name %>]' value='<%= param.default_value %>' >
+            <input type="text" class="<%= param_class(param) %>" name='task_params[<%= param.name %>]' value='<%= param.default_value %>' >
           </div>
         </div>
       <% end %>
