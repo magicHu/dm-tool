@@ -34,6 +34,7 @@ gem 'acts_as_list'
 gem "redis", "~> 3.0.6"
 gem 'carrierwave'
 gem 'kaminari'
+gem 'rails-i18n', '~> 4.0.0'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

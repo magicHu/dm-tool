@@ -18,7 +18,7 @@
     <% @pig_tasks.each do |pig_task| %>
       <tr>
         <td><%= pig_task.name %></td>
-        <td><%= pig_task.created_at %></td>
+        <td><%= l pig_task.created_at, local: 'zh-CN' %></td>
         <td>
           <%= link_to 'Show', pig_task, class: 'btn btn-success' %>
           <%= link_to 'Edit', edit_pig_task_path(pig_task), class: 'btn btn-success' %>
