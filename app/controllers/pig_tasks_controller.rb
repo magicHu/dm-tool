@@ -25,6 +25,9 @@ class PigTasksController < ApplicationController
   end
 
   def run
+    File.open(@pig_task.pig_shell_path, 'wb') do |file|
+      file.write(@pig_task.command)
+    end
     system("nohup bash #{@pig_task.pig_shell_path} > #{@pig_task.pig_log_path} &")
 
     respond_to do |format|
@@ -54,10 +57,6 @@ class PigTasksController < ApplicationController
     task_params = params['task_params']
     @pig_task.assign_attributes(pig_task_params)
     @pig_task.command = @pig_task.generate_command(task_params)
-
-    File.open(@pig_task.pig_shell_path, 'wb') do |file|
-      file.write(@pig_task.command)
-    end
 
     respond_to do |format|
       if @pig_task.update(pig_task_params)

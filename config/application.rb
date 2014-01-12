@@ -22,7 +22,7 @@ module DmTool
 
     config.eager_load_paths += ["#{Rails.root}/lib}"]
 
-    config.pig_shell_dir = "tmp/pig"
-    config.pig_log_dir = "log/pig"
+    config.pig_shell_dir = "#{Rails.root}/tmp/pig"
+    config.pig_log_dir = "#{Rails.root}/log/pig"
   end
 end
