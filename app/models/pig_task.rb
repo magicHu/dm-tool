@@ -41,17 +41,16 @@ export JAVA_HOME=/opt/jdk1.6.0_31
 export PATH=$JAVA_HOME/bin:$PATH
 export CLASSPATH=.:$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar:$CLASSPATH
 export HADOOP_MAPRED_HOME=/usr/lib/hadoop-mapreduce
-
 )
 
     jobs.each do |job|
-      command << generate_job_command(job, params) << "\n"
+      command << "\r\n" << generate_job_command(job, params)
     end
     command
   end
 
   def generate_job_command(job, params)
-    command = "-- #{job.desc}\n"
+    command = "-- #{job.desc}\r\n"
     command << "pig -Dpig.additional.jars=#{PIG_JAR_BASE_DIR}/fastjson-1.1.24.jar:#{PIG_JAR_BASE_DIR}/pig-ext-1.0-SNAPSHOT.jar:#{PIG_JAR_BASE_DIR}/piggybank.jar"
     command << ":#{PIG_JAR_BASE_DIR}/lib/*" if job.hbase?
 
@@ -64,7 +63,7 @@ export HADOOP_MAPRED_HOME=/usr/lib/hadoop-mapreduce
         command << " -p #{param.name}=#{param_value}"
       end
     end
-    command << " #{PIG_SOURDE_BASE_DIR}/#{job.path}" << "\n"
+    command << " #{PIG_SOURDE_BASE_DIR}/#{job.path}" << "\r\n"
     command
   end
 end

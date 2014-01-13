@@ -28,6 +28,7 @@ class PigTasksController < ApplicationController
     File.open(@pig_task.pig_shell_path, 'wb') do |file|
       file.write(@pig_task.command)
     end
+    system("dos2unix #{@pig_task.pig_shell_path}")
     system("nohup bash #{@pig_task.pig_shell_path} > #{@pig_task.pig_log_path} &")
 
     respond_to do |format|
