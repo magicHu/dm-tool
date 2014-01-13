@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
 
-  before_action :set_job, only: [:show, :edit, :update, :destroy, :run, :add_to_task]
+  before_action :set_job, only: [:show, :edit, :update, :destroy, :run, :add_to_task, :update_script]
 
   # GET /jobs
   # GET /jobs.json
@@ -11,8 +11,7 @@ class JobsController < ApplicationController
   # GET /jobs/1
   # GET /jobs/1.json
   def show
-    source_path = "#{pig_source_base_dir}/#{@job.path}"
-    @contents = File.open(source_path, 'rb') {|f| f.read}
+    @script_contents = File.open(@job.script_path, 'rb') {|f| f.read}
   end
 
   # GET /jobs/new
@@ -69,6 +68,19 @@ class JobsController < ApplicationController
     @job.destroy
     respond_to do |format|
       format.html { redirect_to jobs_url }
+      format.json { head :no_content }
+    end
+  end
+
+  def update_script
+    script = params[:script]
+
+    File.open(@job.script_path, 'wb') do |file|
+      file.write(script)
+    end
+
+    respond_to do |format|
+      format.html { redirect_to @job, notice: 'Pig script was successfully updated.' }
       format.json { head :no_content }
     end
   end

@@ -1,1 +1,17 @@
-<h3 class="page-header"></h3>
+<h3 class="page-header">Download HDFS DIR</h3>
+
+<%= form_tag(download_tool_path, method: 'post', class: 'form-inline', role: "form") do |f| %>
+  <div class="form-group">
+    <label class="sr-only" for="hdfs_path">HDFS Path</label>
+    <input type="text" class="form-control" name="hdfs_path" placeholder="Enter HDFS Path">
+  </div>
+
+  <i class="icon-circle-arrow-right icon-large"></i>
+
+  <div class="form-group">
+    <label class="sr-only" for="local_path">Local Path</label>
+    <input type="text" class="form-control" name="local_path" placeholder="Enter Local Path">
+  </div>
+
+  <button type="submit" class="btn btn-success">Download</button>
+<% end %>

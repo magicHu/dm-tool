@@ -5,4 +5,10 @@ class Job < ActiveRecord::Base
   has_many :tasks, class_name: 'PigTask', through: :task_jobs
 
   validates :name, :desc, :path, presence: true
+
+  @@pig_source_base_dir = DmTool::Application.config.pig_source_base_dir
+
+  def script_path
+    "#{@@pig_source_base_dir}/#{path}"
+  end
 end

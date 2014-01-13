@@ -1,6 +1,10 @@
 DmTool::Application.routes.draw do
 
-  get "tools/index"
+  resource :tool do
+    get :index
+    post :download
+  end
+
   resource :dsp do
     get :index
     get :search_match_ad_campaign
@@ -24,7 +28,11 @@ DmTool::Application.routes.draw do
   end
   
   resources :params
-  resources :jobs 
+  resources :jobs do
+    member do
+      post :update_script
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

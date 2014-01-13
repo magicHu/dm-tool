@@ -49,8 +49,7 @@
   </div>
 </div>
 
-
-<%= form_tag(@job, html: { role: "form" }) do |f| %>
+<%= form_tag(update_script_job_path(@job), method: 'post', role: "form") do |f| %>
   <div class="form-group">
     <label for="pig_script">Pig Script</label>
     <button class="btn btn-success pull-right" type="submit">
@@ -58,6 +57,6 @@
       Update
     </button>
 
-    <textarea class="form-control" rows="20" name="contents"><%= @contents %></textarea>
+    <textarea class="form-control" rows="20" name="script"><%= @script_contents %></textarea>
   </div>
 <% end %>

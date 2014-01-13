@@ -50,7 +50,7 @@ export HADOOP_MAPRED_HOME=/usr/lib/hadoop-mapreduce
   end
 
   def generate_job_command(job, params)
-    command = "-- #{job.desc}\r\n"
+    command = "# #{job.desc}\r\n"
     command << "pig -Dpig.additional.jars=#{PIG_JAR_BASE_DIR}/fastjson-1.1.24.jar:#{PIG_JAR_BASE_DIR}/pig-ext-1.0-SNAPSHOT.jar:#{PIG_JAR_BASE_DIR}/piggybank.jar"
     command << ":#{PIG_JAR_BASE_DIR}/lib/*" if job.hbase?
 
