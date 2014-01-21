@@ -29,7 +29,8 @@ class PigTasksController < ApplicationController
       file.write(@pig_task.command)
     end
     system("dos2unix #{@pig_task.pig_shell_path}")
-    system("nohup bash #{@pig_task.pig_shell_path} > #{@pig_task.pig_log_path} &")
+    #system("nohup bash #{@pig_task.pig_shell_path} > #{@pig_task.pig_log_path} &")
+    system("nohup bash #{@pig_task.pig_shell_path} &", :out =>["#{@pig_task.pig_log_path}", 'w'])
 
     respond_to do |format|
       format.html { redirect_to pig_tasks_path, notice: "#{@pig_task.name} task was started..." }

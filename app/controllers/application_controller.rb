@@ -13,10 +13,15 @@ class ApplicationController < ActionController::Base
   end
 
   @@pig_source_base_dir = DmTool::Application.config.pig_source_base_dir
+  @@pig_log_dir = DmTool::Application.config.pig_log_dir
 
   protected
   def pig_source_base_dir
     @@pig_source_base_dir
+  end
+
+  def pig_log_dir
+    @@pig_log_dir
   end
 
   def redis

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131217122617) do
+ActiveRecord::Schema.define(version: 20140113092844) do
 
   create_table "jobs", force: true do |t|
     t.string   "name"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20131217122617) do
   create_table "jobs_params", force: true do |t|
     t.integer "job_id"
     t.integer "param_id"
+    t.boolean "output"
   end
 
   create_table "params", force: true do |t|
