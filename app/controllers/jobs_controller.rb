@@ -11,7 +11,10 @@ class JobsController < ApplicationController
   # GET /jobs/1
   # GET /jobs/1.json
   def show
-    @script_contents = File.open(@job.script_path, 'rb') {|f| f.read}
+    @script_contents = ""
+    if File.exist?(@job.script_path)
+      @script_contents = File.open(@job.script_path, 'rb') {|f| f.read}
+    end
   end
 
   # GET /jobs/new

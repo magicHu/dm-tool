@@ -1,4 +1,6 @@
-<h1 class="page-header">Editing Task</h1>
+<h1 class="page-header">Editing Task
+  <%= link_to 'Back', pig_tasks_path, class: 'btn btn-default' %>
+</h1>
 
 <%= form_for(@pig_task, html: { role: "form", class: "form-horizontal" }) do |f| %>
   <% if @pig_task.errors.any? %>
