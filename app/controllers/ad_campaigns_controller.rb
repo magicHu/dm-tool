@@ -1,12 +1,13 @@
 class AdCampaignsController < ApplicationController
   
-  after_filter :notify_rtt, only: [:create, :destroy]
+  after_filter :notify_rtt_keywords, only: [:create, :destroy]
 
   def index
-    @ad_campaign_keywords = redis.hgetall(ad_campaign_keywords_key)
+    @ad_campaign_keywords = redis.hgetall(ad_campaign_keywords_key) || {}
+    @ad_campaign_target_url = redis.hgetall(ad_campaign_target_url) || {}
 
     @ad_campaign_match_count = {}
-    @ad_campaign_keywords.each do |ad_campaign_id, keywords|
+    (@ad_campaign_keywords.keys + @ad_campaign_target_url.keys).each do |ad_campaign_id|
       key = rtt_ad_campaign_prefix + ad_campaign_id
       redis_clients.each do |redis_client|
         ad_campaign_match_count = @ad_campaign_match_count[ad_campaign_id]
@@ -33,7 +34,12 @@ class AdCampaignsController < ApplicationController
   end
 
   private
-  def notify_rtt
-    redis.publish(adCampaignKeywordChannel, "reload")
+  def notify_rtt_keywords
+    #redis.publish(adCampaignKeywordChannel, "reload")
+    redis.publish(ad_campaign_config_channel, "keywords")
+  end
+
+  def notify_rtt_target_url
+    redis.publish(ad_campaign_config_channel, "retargetUrl")
   end
 end

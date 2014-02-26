@@ -36,8 +36,16 @@ class ApplicationController < ActionController::Base
     "adCampaignKeywords"
   end
 
-  def adCampaignKeywordChannel
+  def ad_campaign_target_url
+    "adCampaignTargetUrl"
+  end
+
+  def ad_campaign_keyword_channel
     "adCampaignKeywordChannel"
+  end
+
+  def ad_campaign_config_channel
+    "adCampaignConfigChannel"
   end
 
   def rtt_ad_campaign_prefix
