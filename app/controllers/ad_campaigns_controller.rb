@@ -1,10 +1,10 @@
 class AdCampaignsController < ApplicationController
   
-  after_filter :notify_rtt_keywords, only: [:create, :destroy]
+  after_filter :notify_rtt, only: [:create, :destroy]
 
   def index
     @ad_campaign_keywords = redis.hgetall(ad_campaign_keywords_key) || {}
-    @ad_campaign_target_url = redis.hgetall(ad_campaign_target_url) || {}
+    @ad_campaign_target_url = redis.hgetall(ad_campaign_target_url_key) || {}
 
     @ad_campaign_match_count = {}
     (@ad_campaign_keywords.keys + @ad_campaign_target_url.keys).each do |ad_campaign_id|
@@ -20,26 +20,46 @@ class AdCampaignsController < ApplicationController
 
   def destroy
     ad_campaign_id = params[:id]
-    redis.hdel(ad_campaign_keywords_key, ad_campaign_id)
+    target_type = params[:target_type]
+
+    if is_keywords?(target_type)
+      redis.hdel(ad_campaign_keywords_key, ad_campaign_id)
+    elsif is_retargeturl?(target_type)
+      redis.hdel(ad_campaign_target_url_key, ad_campaign_id)
+    end
 
     redirect_to :action => :index
   end
 
   def create
     ad_campaign_id = params[:id]
-    keywords = params[:keywords]
-    redis.hset(ad_campaign_keywords_key, ad_campaign_id, keywords)
+    target_type = params[:target_type]
 
+    if is_keywords?(target_type)
+      keywords = params[:keywords]
+      redis.hset(ad_campaign_keywords_key, ad_campaign_id, keywords)
+    elsif is_retargeturl?(target_type)
+      target_url = params[:target_url]
+      redis.hset(ad_campaign_target_url_key, ad_campaign_id, target_url)
+    end
+    
     redirect_to :action => :index
   end
 
   private
-  def notify_rtt_keywords
-    #redis.publish(adCampaignKeywordChannel, "reload")
-    redis.publish(ad_campaign_config_channel, "keywords")
+
+  def is_keywords?(target_type)
+    target_type == "1"
   end
 
-  def notify_rtt_target_url
+  def is_retargeturl?(target_type)
+    target_type == "2"
+  end
+
+  def notify_rtt
+    #redis.publish(adCampaignKeywordChannel, "reload")
+    redis.publish(ad_campaign_config_channel, "keywords")
     redis.publish(ad_campaign_config_channel, "retargetUrl")
   end
+
 end

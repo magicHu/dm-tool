@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
     "adCampaignKeywords"
   end
 
-  def ad_campaign_target_url
+  def ad_campaign_target_url_key
     "adCampaignTargetUrl"
   end
 
